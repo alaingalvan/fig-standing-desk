@@ -1,0 +1,12 @@
+[package]
+name = "fig-table-server"
+version = "0.1.0"
+authors = ["Alain Galvan <hi@alain.xyz>"]
+
+[dependencies]
+iron = "0.4.0"
+sysfs_gpio = "0.5.0"
+toml = "0.2.1"
+
+[dependencies.bodyparser]
+git = "https://github.com/iron/body-parser.git"

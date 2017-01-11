@@ -1,0 +1,11 @@
+{
+  "name": "fig-table-client",
+  "version": "1.0.0",
+  "description": "Node.js CLI for Fig Table",
+  "main": "src/main.js",
+  "bin": {
+    "fig-table": "./src/main.js"
+  },
+  "author": "Alain Galvan <hi@alain.xyz>",
+  "license": "MIT"
+}

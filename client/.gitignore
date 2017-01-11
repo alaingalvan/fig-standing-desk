@@ -1,0 +1,30 @@
+# Dependency directory
+node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.ssh
+*.ppk
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+bin
+ts-node
+
+# Personal Scripts
+*.bat
+*.ssh
+yarn.lock
+
+# Editors
+.vscode
