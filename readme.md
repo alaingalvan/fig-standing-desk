@@ -24,7 +24,7 @@ A repository with everything involved in the design and engineering of the Fig T
 
 ## Server
 
-The application that runs on the Raspberry Pi 3 B+, creates an HTTP server at port `74613` (l33t for **table**) that a client can POST to.
+The application that runs on the Raspberry Pi 3 B+, creates an HTTP server at port `3007` that a client can POST to.
 
 - `/api` - POST API endpoint, you send the following schema.
 
@@ -41,7 +41,16 @@ type APIRequest = {
 
 ```bash
 rustup target add aarch64-unknown-linux-gnu
-cargo run --target=aarch64-unknown-linux-gnu
+cargo build --target=aarch64-unknown-linux-gnu
+```
+
+### Deploying
+
+Login to the Pi, then set up the GPIO pins for PWM signals.
+
+```bash
+gpio -g mode 18 pwm
+gpio -g mode 12 pwm
 ```
 
 ## Client
@@ -49,7 +58,7 @@ cargo run --target=aarch64-unknown-linux-gnu
 A CLI application that's meant to be installed as a global module on node. 
 
 ```bash
-npm i git://github.com/alaingalvan/fig-table#some-branch::/client -g
+npm i git://github.com/alaingalvan/fig-table#master::/client -g
 ```
 
 ```bash
@@ -70,6 +79,15 @@ Options:
 ## CAD
 
 Blender files used to design and CNC the table.
+
+## Pi GPIO Layout
+
+| Physical Pin | Description | Motor Controller |
+|----------|-------------|------------------|
+| 32 | GPIO 12 (PWM0) | PWM 2 |
+| 31 | GPIO 6 | Direction 2 |
+| 12 | GPIO 18 (PWM0) | PWM 1 |
+| 11 | GPIO 17 | Direction 1 |
 
 [license-img]: http://img.shields.io/:license-mit-blue.svg?style=flat-square
 [license-url]: https://opensource.org/licenses/MIT
