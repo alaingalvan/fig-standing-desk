@@ -76,10 +76,10 @@ raspi-config
 
 # Now download the server release
 cd ~
-wget https://github.com/alaingalvan/fig-standing-desk/releases
-tar xf release.tar.gz
+wget https://github.com/alaingalvan/fig-standing-desk/releases/download/1.0.0/fig-standing-desk-server.tar.gz
+mkdir fig-standing-desk
+tar -xzf fig-standing-desk-server.tar.gz -C fig-standing-desk
 cd fig-standing-desk
-cd server/dist
 dtc -@ -I dts -O dtb -o pwm-2mono-with-clk.dtbo pwm-2mono-with-clk-overlay.dts
 sudo cp pwm-2mono-with-clk.dtbo /boot/overlays
 ```
@@ -90,7 +90,7 @@ Then `cd` to the standing desk server distribution.
 
 ```bash
 # Run the server as root.
-sudo server
+sudo fig-table-server
 ```
 Refer to this [blog post](http://www.jumpnowtek.com/rpi/Using-the-Raspberry-Pi-Hardware-PWM-timers.html) if you get lost.
 

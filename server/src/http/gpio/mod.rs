@@ -47,5 +47,5 @@ pub fn send(vector: f32, time: u32) {
         .output()
         .expect("failed to execute process");
 
-
+    println!("Sent direction and PWM signals.");
 }
