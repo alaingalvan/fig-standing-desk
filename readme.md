@@ -39,8 +39,20 @@ type APIRequest = {
 
 ### Compiling
 
+Instructions come from [this guide](https://github.com/japaric/rust-cross).
+
 ```bash
-rustup target add aarch64-unknown-linux-gnu
+# Step 1: Install the C cross toolchain
+sudo apt-get install -qq gcc-arm-linux-gnueabihf
+
+# Step 2: Install the cross compiled standard crates
+rustup target add armv7-unknown-linux-gnueabihf
+
+# Step 3: Configure cargo for cross compilation
+mkdir -p ~/.cargo
+cat >>~/.cargo/config <<EOF\n[target.armv7-unknown-linux-gnueabihf]\nlinker = "arm-linux-gnueabihf-gcc"EOF
+
+# Step 4: Build
 cargo build --target=aarch64-unknown-linux-gnu
 ```
 
@@ -81,12 +93,6 @@ Then `cd` to the standing desk server distribution.
 sudo server
 ```
 Refer to this [blog post](http://www.jumpnowtek.com/rpi/Using-the-Raspberry-Pi-Hardware-PWM-timers.html) if you get lost.
-
-
-# Download the server
-
-sudo server
-```
 
 ## Client
 

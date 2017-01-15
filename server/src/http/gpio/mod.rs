@@ -1,48 +1,51 @@
 use std::thread::sleep;
 use std::time::Duration;
+use std::process::Command;
 
-extern crate sysfs_gpio;
+use sysfs_gpio::{Direction, Pin};
+
+
 
 pub fn send(vector: f32, time: u32) {
-    println!("Recived request to move {} direction for {} milliseconds.", vector, time);
+    let dir1 = Pin::new(6);
+    let dir2 = Pin::new(17);
+
+
+    println!("Recived request to move {} direction for {} milliseconds.",
+             vector,
+             time);
 
     // Convert direction to normalized float and bool direction.
-    // ================================
-
+    let direction = if vector > 0.0 { 1 } else { 0 };
     let length = vector.abs() % 1.0;
-
-    let direction = vector > 0.0;
 
     println!("Going in dir {} at length {}.", direction, length);
 
-    // Access Physical Memory Location on Linux via memmap
+    dir1.with_exported(|| {
+        try!(dir1.set_direction(Direction::Out));
+        dir1.set_value(direction);
+        Ok(())
+    });
 
-    //
+    dir2.with_exported(|| {
+        try!(dir2.set_direction(Direction::Out));
+        dir2.set_value(direction);
+        Ok(())
+    });
 
-    // Write Direction to GPIO 6 and 17
-    // Refer to BCM2835 ARM Peripherals page 89
-    // ================================
+    let exportpwm0 = Command::new("echo 0 > /sys/class/pwm/pwmchip0/export")
+        .output()
+        .expect("failed to execute process");
 
+    let set_period = Command::new("echo 10000000 > /sys/class/pwm/pwmchip0/pwm0/period")
+        .output()
+        .expect("failed to execute process");
+    let set_duty = Command::new("echo 8000000 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle")
+        .output()
+        .expect("failed to execute process");
+    let set_enable = Command::new("echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable")
+        .output()
+        .expect("failed to execute process");
 
-
-    // Write to PWM Registers
-    // Refer to BCM2835 ARM Peripherals page 138
-    // ================================
-
-    // CTL Register
-    let ctl_mask: u32 = 0b1000000110000001;
-
-    // DMAC register
-    let dmac_mask: u32 = 0x8000;
-
-    // RNG1 register (Pulse Width)
-    let rng1_mask: u32 = (32.0 * length) as u32;
-
-    // DTA1 register (Pulses)
-    let data1_mask: u32 = 0x1;
-
-    // GPIO12 ALT0
-
-    // GPIO18 ALT5
 
 }
