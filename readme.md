@@ -49,8 +49,11 @@ cargo build --target=aarch64-unknown-linux-gnu
 Login to the Pi, then set up the GPIO pins for PWM signals.
 
 ```bash
-gpio -g mode 18 pwm
-gpio -g mode 12 pwm
+# Download the server
+mkdir table_server
+wget ---
+cd table_server
+sudo server
 ```
 
 ## Client

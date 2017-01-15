@@ -22,7 +22,7 @@ pub fn create_server() -> Nickel {
       // Perform request with gpio device.
       gpio::send(data.vector, data.time);
 
-      format!("{{}}")
+      format!("")
 
     });
 

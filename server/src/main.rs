@@ -2,8 +2,6 @@
 extern crate nickel;
 extern crate rustc_serialize;
 
-extern crate sysfs_gpio;
-
 mod http;
 
 fn main() {
