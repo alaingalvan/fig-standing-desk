@@ -22,3 +22,11 @@ Use the python wrappers for the GPIO pins to manipulate them and rewriting the s
 
 I opted to use design 2 since this offer the right level of control while at the same time saving me from the headache of having to figure out which address I'm supposed to be dealing with, memory mapping, etc. This is also far more portable for future Pis.
 
+Basically, all I need to do is enable the pwm pin outputs in kernel space using a kernel script, then use the bash to talk with the pwm controller.
+
+```bash
+/sys/class/pwm/pwmchip0# echo 0 > export
+/sys/class/pwm/pwmchip0# echo 10000000 > pwm0/period
+/sys/class/pwm/pwmchip0# echo 8000000 > pwm0/duty_cycle
+/sys/class/pwm/pwmchip0# echo 1 > pwm0/enable
+```

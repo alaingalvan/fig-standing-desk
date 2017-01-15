@@ -46,13 +46,45 @@ cargo build --target=aarch64-unknown-linux-gnu
 
 ### Deploying
 
-Login to the Pi, then set up the GPIO pins for PWM signals.
+Wire your Pi as follows:
+
+| Physical Pin | Description | Motor Controller |
+|----------|-------------|------------------|
+| 32 | GPIO 12 (PWM0) | PWM 2 |
+| 31 | GPIO 6 | Direction 2 |
+| 12 | GPIO 18 (PWM0) | PWM 1 |
+| 11 | GPIO 17 | Direction 1 |
+
+Install Raspian lite, and configure it for your keyboard/country since by default it's set to the UK. Enable device tree to allow us to add new modules to be loaded by the kernel.
 
 ```bash
+# Set your Country and Keyboard, and 
+# enable Device Tree in advanced settings
+raspi-config
+
+# Now download the server release
+cd ~
+wget https://github.com/alaingalvan/fig-standing-desk/releases
+tar xf release.tar.gz
+cd fig-standing-desk
+cd server/dist
+dtc -@ -I dts -O dtb -o pwm-2mono-with-clk.dtbo pwm-2mono-with-clk-overlay.dts
+sudo cp pwm-2mono-with-clk.dtbo /boot/overlays
+```
+
+Shutdown, modify `config.txt` on your pi, add `dtoverlay=pwm-2mono-with-clk`.
+
+Then `cd` to the standing desk server distribution.
+
+```bash
+# Run the server as root.
+sudo server
+```
+Refer to this [blog post](http://www.jumpnowtek.com/rpi/Using-the-Raspberry-Pi-Hardware-PWM-timers.html) if you get lost.
+
+
 # Download the server
-mkdir table_server
-wget ---
-cd table_server
+
 sudo server
 ```
 
@@ -83,14 +115,6 @@ Options:
 
 Blender files used to design and CNC the table.
 
-## Pi GPIO Layout
-
-| Physical Pin | Description | Motor Controller |
-|----------|-------------|------------------|
-| 32 | GPIO 12 (PWM0) | PWM 2 |
-| 31 | GPIO 6 | Direction 2 |
-| 12 | GPIO 18 (PWM0) | PWM 1 |
-| 11 | GPIO 17 | Direction 1 |
 
 [license-img]: http://img.shields.io/:license-mit-blue.svg?style=flat-square
 [license-url]: https://opensource.org/licenses/MIT
