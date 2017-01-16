@@ -1,9 +1,11 @@
+#!/usr/bin/env node
+
 const process = require('process');
 const http = require('http');
 const fs = require('fs');
 
 
-const helpMessage =
+var helpMessage =
   `
 fig-table Node.js CLI
 
@@ -23,23 +25,23 @@ const commandMap = {
     console.log(helpMessage)
   },
 
-  '-h': this['--help'],
+  '-h': () => commandMap['--help'](),
 
   '--version': () => {
     console.log(JSON.parse(fs.readFileSync('../package.json').version));
   },
 
-  '-v': this['--version'],
+  '-v': () => commandMap['--version'](),
 
   '--config': (args) => {
     if (args.length > 0 && args[1].match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/))
       return console.error('Error: Please enter a valid IPv4 address.');
 
-    fs.writeFileSync('./config.json', JSON.stringify({ ip: argv[0] }), { encoding: 'utf8' });
+    fs.writeFileSync('./config.json', JSON.stringify({ ip: args[0] }), { encoding: 'utf8' });
 
   },
 
-  '-c': this['--config'],
+  '-c': () => commandMap['--config'](),
 
   '(?:\d*\.)?\d+': (args) => {
 
@@ -92,7 +94,7 @@ for (var i = 0; i < process.argv.length; i++) {
   // Check if there's a key in the Command Map 
   // that matches the command line argument
   var match = Object.keys(commandMap).reduce(
-    (prev, cur) => prev | RegExp(cur).match(process.argv[i]),
+    (prev, cur) => prev | RegExp(cur).exec(process.argv[i]),
     null);
 
   if (match) {

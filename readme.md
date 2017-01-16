@@ -76,7 +76,7 @@ raspi-config
 
 # Now download the server release
 cd ~
-wget https://github.com/alaingalvan/fig-standing-desk/releases/download/1.0.0/fig-standing-desk-server.tar.gz
+wget github.com/alaingalvan/fig-standing-desk/releases/download/1.0.0/fig-standing-desk-server.tar.gz
 mkdir fig-standing-desk
 tar -xzf fig-standing-desk-server.tar.gz -C fig-standing-desk
 cd fig-standing-desk
@@ -89,8 +89,16 @@ Shutdown, modify `config.txt` on your pi, add `dtoverlay=pwm-2mono-with-clk`.
 Then `cd` to the standing desk server distribution.
 
 ```bash
+# Configure either iptables or an nginx reverse proxy
+sudo iptables -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 3007
+
 # Run the server as root.
 sudo fig-table-server
+
+# Create a service that includes the server.
+cat >>/etc/init/table-server.conf <<EOF\n exec ~/fig-standing-desk/fig-table-server EOF
+sudo ln -s /etc/init/table-server.conf /etc/init.d/table-server
+sudo service table-server start
 ```
 Refer to this [blog post](http://www.jumpnowtek.com/rpi/Using-the-Raspberry-Pi-Hardware-PWM-timers.html) if you get lost.
 
@@ -99,7 +107,8 @@ Refer to this [blog post](http://www.jumpnowtek.com/rpi/Using-the-Raspberry-Pi-H
 A CLI application that's meant to be installed as a global module on node. 
 
 ```bash
-npm i git://github.com/alaingalvan/fig-table#master::/client -g
+git clone git@github.com:alaingalvan/fig-standing-desk.git
+npm i client
 ```
 
 ```bash

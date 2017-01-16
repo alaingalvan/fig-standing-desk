@@ -4,7 +4,7 @@
   "description": "Node.js CLI for Fig Table",
   "main": "src/main.js",
   "bin": {
-    "fig-table": "./src/main.js"
+    "fig-table": "./main.js"
   },
   "author": "Alain Galvan <hi@alain.xyz>",
   "license": "MIT"
