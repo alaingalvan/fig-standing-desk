@@ -70,6 +70,10 @@ pub fn send(vector: f32, time: u32) {
 
     dir1.unexport();
     dir2.unexport();
+
+    move1.set_value(0);
+    move2.set_value(0);
+
     move1.unexport();
     move2.unexport();
 }
