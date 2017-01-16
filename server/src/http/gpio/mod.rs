@@ -37,27 +37,41 @@ pub fn send(vector: f32, time: u32) {
     dir2.set_direction(Direction::Low);
     dir2.set_value(direction);
 
-    println!("Sent GPIO signals.");
+    println!("Sent GPIO Direction signals.");
 
-    let exportpwm0 = Command::new("echo 0 > /sys/class/pwm/pwmchip0/export")
-        .output()
-        .expect("failed to execute process");
-    sleep(Duration::from_millis(10));
-    let set_period = Command::new("echo 10000000 > /sys/class/pwm/pwmchip0/pwm0/period")
-        .output()
-        .expect("failed to execute process");
-    sleep(Duration::from_millis(10));
-    let set_duty = Command::new("echo 8000000 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle")
-        .output()
-        .expect("failed to execute process");
-    sleep(Duration::from_millis(10));
-    let set_enable = Command::new("echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable")
-        .output()
-        .expect("failed to execute process");
+    // Since PWM doesn't seem to work, send GPIO 100% signals.
+    let move1 = Pin::new(12);
+
+    move1.export();
+    move1.set_direction(Direction::High);
+    move1.set_value(1);
+    
+    let move2 = Pin::new(18);
+    move2.export();
+    move2.set_direction(Direction::High);
+    move2.set_value(1);
+
+    // let exportpwm0 = Command::new("echo 0 > /sys/class/pwm/pwmchip0/export")
+    // .output()
+    // .expect("failed to execute process");
+    // sleep(Duration::from_millis(10));
+    // let set_period = Command::new("echo 10000000 > /sys/class/pwm/pwmchip0/pwm0/period")
+    // .output()
+    // .expect("failed to execute process");
+    // sleep(Duration::from_millis(10));
+    // let set_duty = Command::new("echo 8000000 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle")
+    // .output()
+    // .expect("failed to execute process");
+    // sleep(Duration::from_millis(10));
+    // let set_enable = Command::new("echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable")
+    // .output()
+    // .expect("failed to execute process");
 
     sleep(Duration::from_millis(100));
     println!("Sent direction and PWM signals.");
 
     dir1.unexport();
     dir2.unexport();
+    move1.unexport();
+    move2.unexport();
 }
