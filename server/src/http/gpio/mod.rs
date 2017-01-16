@@ -20,9 +20,12 @@ pub fn send(vector: f32, time: u32) {
     let direction = if vector > 0.0 { 1 } else { 0 };
     let length = vector.abs() % 1.0;
 
+    if length > 0.1 {return};
+
     println!("Going in dir {} at length {}.", direction, length);
 
     // Perhaps this should be conccurrent?
+
     dir1.export();
     dir1.set_direction(Direction::Low);
     dir1.set_value(direction);
@@ -31,6 +34,8 @@ pub fn send(vector: f32, time: u32) {
     dir2.export();
     dir2.set_direction(Direction::Low);
     dir2.set_value(direction);
+
+    println!("Sent GPIO signals.");
 
     let exportpwm0 = Command::new("echo 0 > /sys/class/pwm/pwmchip0/export")
         .output()

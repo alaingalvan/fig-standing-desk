@@ -9,7 +9,7 @@ fn main() {
 
     println!("
 Fig Standing Desk Server
-Version 1.0 (January 7, 2017)
+Version 1.0 (January 16, 2017)
 =============================
     ");
 
