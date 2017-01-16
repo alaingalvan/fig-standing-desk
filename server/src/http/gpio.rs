@@ -25,10 +25,20 @@ pub fn send(vector: f32, time: u32) {
     println!("Going in dir {} at length {}.", direction, length);
 
     // Perhaps this should be conccurrent?
+    match dir1.export() {
+        Ok(()) => println!("Gpio {} exported!", dir1.get_pin()),
+        Err(err) => println!("Gpio {} could not be exported: {}", dir1.get_pin(), err)
+    }
 
-    dir1.export();
-    dir1.set_direction(Direction::Out);
-    dir1.set_value(direction);
+     match dir1.set_direction(Direction::Out) {
+        Ok(()) => println!("Gpio {} direction set!", dir1.get_pin()),
+        Err(err) => println!("Gpio {} could not set direction: {}", dir1.get_pin(), err)
+     }
+
+    match dir1.set_value(direction) {
+        Ok(()) => println!("Gpio {} value set!", dir1.get_pin()),
+        Err(err) => println!("Gpio {} could not set value: {}", dir1.get_pin(), err)
+    }
 
 
     dir2.export();
@@ -43,7 +53,7 @@ pub fn send(vector: f32, time: u32) {
     move1.export();
     move1.set_direction(Direction::Out);
     move1.set_value(1);
-    
+
     let move2 = Pin::new(18);
     move2.export();
     move2.set_direction(Direction::Out);
