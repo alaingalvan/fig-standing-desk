@@ -20,7 +20,9 @@ pub fn send(vector: f32, time: u32) {
     let direction = if vector > 0.0 { 1 } else { 0 };
     let length = vector.abs() % 1.0;
 
-    if length > 0.1 {return};
+    if length < 0.1 {
+        return;
+    };
 
     println!("Going in dir {} at length {}.", direction, length);
 
@@ -40,15 +42,15 @@ pub fn send(vector: f32, time: u32) {
     let exportpwm0 = Command::new("echo 0 > /sys/class/pwm/pwmchip0/export")
         .output()
         .expect("failed to execute process");
-
+    sleep(Duration::from_millis(10));
     let set_period = Command::new("echo 10000000 > /sys/class/pwm/pwmchip0/pwm0/period")
         .output()
         .expect("failed to execute process");
-
+    sleep(Duration::from_millis(10));
     let set_duty = Command::new("echo 8000000 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle")
         .output()
         .expect("failed to execute process");
-
+    sleep(Duration::from_millis(10));
     let set_enable = Command::new("echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable")
         .output()
         .expect("failed to execute process");
