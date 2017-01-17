@@ -25,7 +25,8 @@ pub fn send(vector: f32, time: u32) {
 
     println!("Going in dir {} at length {}.", direction, length);
 
-    // Perhaps this should be conccurrent?
+    // Just checking the first couple of GPIO requests.
+
     match dir1.export() {
         Ok(()) => println!("Gpio {} exported!", dir1.get_pin()),
         Err(err) => println!("Gpio {} could not be exported: {}", dir1.get_pin(), err),
@@ -54,52 +55,16 @@ pub fn send(vector: f32, time: u32) {
     pwm.with_exported(|| {
             pwm.enable(true).unwrap();
             pwm.set_period_ns(2500000).unwrap();
-            loop {
-                pwm_increase_to_max(&pwm, time / 2, 50).unwrap();
-                pwm_decrease_to_minimum(&pwm, time / 2, 50).unwrap();
-            }
+            pwm_increase_to_max(&pwm, time / 2, ((time as f32 / 2.0) * 0.8) as u32).unwrap();
+            pwm_decrease_to_minimum(&pwm, time / 2, ((time as f32 / 2.0) * 0.8) as u32).unwrap();
+            Ok(())
         })
         .unwrap();
-    // Since PWM doesn't seem to work, send GPIO 100% signals.
-    // let move1 = Pin::new(12);
-    //
-    // move1.export();
-    // move1.set_direction(Direction::Out);
-    // move1.set_value(1);
-    //
-    // let move2 = Pin::new(18);
-    // move2.export();
-    // move2.set_direction(Direction::Out);
-    // move2.set_value(1);
-    //
-    // let exportpwm0 = Command::new("echo 0 > /sys/class/pwm/pwmchip0/export")
-    // .output()
-    // .expect("failed to execute process");
-    // sleep(Duration::from_millis(10));
-    // let set_period = Command::new("echo 10000000 > /sys/class/pwm/pwmchip0/pwm0/period")
-    // .output()
-    // .expect("failed to execute process");
-    // sleep(Duration::from_millis(10));
-    // let set_duty = Command::new("echo 8000000 > /sys/class/pwm/pwmchip0/pwm0/duty_cycle")
-    // .output()
-    // .expect("failed to execute process");
-    // sleep(Duration::from_millis(10));
-    // let set_enable = Command::new("echo 1 > /sys/class/pwm/pwmchip0/pwm0/enable")
-    // .output()
-    // .expect("failed to execute process");
-    //
-    // sleep(Duration::from_millis(time as u64));
-    // println!("Sent direction and PWM signals.");
-    //
-    //
-    // move1.set_value(0);
-    // move2.set_value(0);
-
-    // move1.unexport();
-    // move2.unexport();
 
     dir1.unexport();
     dir2.unexport();
+    println!("Sent PWM signals.");
+
 }
 
 
