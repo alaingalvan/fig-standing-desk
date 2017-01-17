@@ -44,7 +44,7 @@ Instructions come from [this guide](https://github.com/japaric/rust-cross).
 ```bash
 # Step 1: Install the C cross toolchain
 sudo apt-get install -qq gcc-arm-linux-gnueabihf
-
+ls
 # Step 2: Install the cross compiled standard crates
 rustup target add armv7-unknown-linux-gnueabihf
 
@@ -61,7 +61,7 @@ cargo build --target=aarch64-unknown-linux-gnu
 Wire your Pi as follows:
 
 | Physical Pin | Description | Motor Controller |
-|----------|-------------|------------------|
+|--------------|-------------|------------------|
 | 32 | GPIO 12 (PWM0) | PWM 2 |
 | 31 | GPIO 6 | Direction 2 |
 | 12 | GPIO 18 (PWM0) | PWM 1 |

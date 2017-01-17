@@ -2,6 +2,7 @@
 extern crate nickel;
 extern crate rustc_serialize;
 extern crate sysfs_gpio;
+extern crate sysfs_pwm;
 
 mod http;
 
@@ -9,7 +10,7 @@ fn main() {
 
     println!("
 Fig Standing Desk Server
-Version 1.1 (January 16, 2017)
+Version 1.2 (January 16, 2017)
 =============================");
 
     let server = http::create_server();
