@@ -55,8 +55,9 @@ pub fn send(vector: f32, time: u32) {
     pwm.with_exported(|| {
             pwm.enable(true).unwrap();
             pwm.set_period_ns(2500000).unwrap();
-            pwm_increase_to_max(&pwm, time / 2, ((time as f32 / 2.0) * 0.8) as u32).unwrap();
-            pwm_decrease_to_minimum(&pwm, time / 2, ((time as f32 / 2.0) * 0.8) as u32).unwrap();
+            pwm.set_duty_cycle_ns(2500000/2);
+            sleep(Duration::from_millis(time as u64));
+            pwm.enable(false);
             Ok(())
         })
         .unwrap();
