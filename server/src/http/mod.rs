@@ -1,4 +1,4 @@
-use nickel::{Nickel, JsonBody, HttpRouter, MediaType};
+use nickel::{Nickel, JsonBody, HttpRouter};
 
 mod gpio;
 

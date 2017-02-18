@@ -53,7 +53,7 @@ mkdir -p ~/.cargo
 cat >>~/.cargo/config <<EOF\n[target.armv7-unknown-linux-gnueabihf]\nlinker = "arm-linux-gnueabihf-gcc"EOF
 
 # Step 4: Build
-cargo build --target=aarch64-unknown-linux-gnu
+cargo build --target=armv7-unknown-linux-gnueabihf
 ```
 
 ### Deploying

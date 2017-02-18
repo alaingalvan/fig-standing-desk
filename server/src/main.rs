@@ -9,8 +9,8 @@ mod http;
 fn main() {
 
     println!("
-Fig Standing Desk Server
-Version 1.2.2 (January 18, 2017)
+🍐 Fig Standing Desk Server
+Version 1.3.0 (Feburary 18, 2017)
 ================================");
 
     let server = http::create_server();

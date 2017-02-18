@@ -1,15 +1,8 @@
 use std::thread::sleep;
 use std::time::Duration;
-use std::process::Command;
-
 use sysfs_gpio::{Direction, Pin};
-use sysfs_pwm::{Pwm, Result};
 
 pub fn send(vector: f32, time: u32) {
-
-    let dir1 = Pin::new(6);
-    let dir2 = Pin::new(17);
-
 
     println!("Recived request to move {} direction for {} milliseconds.",
              vector,
@@ -25,68 +18,50 @@ pub fn send(vector: f32, time: u32) {
 
     println!("Going in dir {} at length {}.", direction, length);
 
-    // Just checking the first couple of GPIO requests.
+    let actuator1up = Pin::new(6);
+    let actuator1down = Pin::new(13);
+    let actuator2up = Pin::new(19);
+    let actuator2down = Pin::new(26);
 
-    match dir1.export() {
-        Ok(()) => println!("Gpio {} exported!", dir1.get_pin()),
-        Err(err) => println!("Gpio {} could not be exported: {}", dir1.get_pin(), err),
+    actuator1up.export();
+    actuator2up.export();
+    actuator1down.export();
+    actuator2down.export();
+
+    actuator1up.set_direction(Direction::Out);
+    actuator2up.set_direction(Direction::Out);
+    actuator1down.set_direction(Direction::Out);
+    actuator2down.set_direction(Direction::Out);
+
+    actuator1up.set_value(0);
+    actuator1down.set_value(0);
+    actuator2up.set_value(0);
+    actuator2down.set_value(0);
+
+    match direction {
+        0 => {
+            actuator1down.set_value(1);
+            actuator2down.set_value(1);
+        }
+        _ => {
+            actuator1up.set_value(1);
+            actuator2up.set_value(1);
+        }
     }
 
-    match dir1.set_direction(Direction::Out) {
-        Ok(()) => println!("Gpio {} direction set!", dir1.get_pin()),
-        Err(err) => println!("Gpio {} could not set direction: {}", dir1.get_pin(), err),
-    }
+    sleep(Duration::from_millis(time as u64));
 
-    match dir1.set_value(direction) {
-        Ok(()) => println!("Gpio {} value set!", dir1.get_pin()),
-        Err(err) => println!("Gpio {} could not set value: {}", dir1.get_pin(), err),
-    }
+    actuator1up.set_value(0);
+    actuator1down.set_value(0);
+    actuator2up.set_value(0);
+    actuator2down.set_value(0);
 
-    // 400 hz means 400 times a second
+    actuator1up.unexport();
+    actuator2up.unexport();
+    actuator1down.unexport();
+    actuator2down.unexport();
 
-    dir2.export();
-    dir2.set_direction(Direction::Out);
-    dir2.set_value(direction);
-
-    println!("Sent GPIO Direction signals.");
-
-
-    let pwm = Pwm::new(0, 0).unwrap(); // number depends on chip, etc.
-    pwm.with_exported(|| {
-            pwm.enable(true).unwrap();
-            pwm.set_period_ns(2500000).unwrap();
-            pwm.set_duty_cycle_ns(2500000/2);
-            sleep(Duration::from_millis(time as u64));
-            pwm.enable(false);
-            Ok(())
-        })
-        .unwrap();
-
-    dir1.unexport();
-    dir2.unexport();
-    println!("Sent PWM signals.");
+    println!("Sent Relay Signals.");
 
 }
 
-
-fn pwm_increase_to_max(pwm: &Pwm, duration_ms: u32, update_period_ms: u32) -> Result<()> {
-    let step: f32 = duration_ms as f32 / update_period_ms as f32;
-    let mut duty_cycle = 0.0;
-    let period_ns: u32 = try!(pwm.get_period_ns());
-    while duty_cycle < 1.0 {
-        try!(pwm.set_duty_cycle_ns((duty_cycle * period_ns as f32) as u32));
-        duty_cycle += step;
-    }
-    pwm.set_duty_cycle_ns(period_ns)
-}
-
-fn pwm_decrease_to_minimum(pwm: &Pwm, duration_ms: u32, update_period_ms: u32) -> Result<()> {
-    let step: f32 = duration_ms as f32 / update_period_ms as f32;
-    let mut duty_cycle = 1.0;
-    let period_ns: u32 = try!(pwm.get_period_ns());
-    while duty_cycle > 0.0 {
-        try!(pwm.set_duty_cycle_ns((duty_cycle * period_ns as f32) as u32));
-        duty_cycle -= step;
-    }
-    pwm.set_duty_cycle_ns(0)
-}
