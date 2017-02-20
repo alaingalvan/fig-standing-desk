@@ -4,7 +4,7 @@ mod gpio;
 
 #[derive(RustcDecodable, RustcEncodable)]
 struct APIRequest {
-    vector: f32,
+    direction: f32,
     time: u32
 }
 
@@ -20,7 +20,7 @@ pub fn create_server() -> Nickel {
       let data = request.json_as::<APIRequest>().unwrap();
 
       // Perform request with gpio device.
-      gpio::send(data.vector, data.time);
+      gpio::send(data.direction, data.time);
 
       format!("")
 

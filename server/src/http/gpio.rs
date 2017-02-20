@@ -2,15 +2,15 @@ use std::thread::sleep;
 use std::time::Duration;
 use sysfs_gpio::{Direction, Pin};
 
-pub fn send(vector: f32, time: u32) {
+pub fn send(direction: f32, time: u32) {
 
     println!("Recived request to move {} direction for {} milliseconds.",
-             vector,
+             direction,
              time);
 
     // Convert direction to normalized float and bool direction.
-    let direction = if vector > 0.0 { 1 } else { 0 };
-    let length = vector.abs() % 1.0;
+    let dir = if direction > 0.0 { 1 } else { 0 };
+    let length = direction.abs() % 1.001;
 
     if length < 0.1 || time < 10 {
         return;
@@ -38,14 +38,14 @@ pub fn send(vector: f32, time: u32) {
     actuator2up.set_value(0);
     actuator2down.set_value(0);
 
-    match direction {
+    match dir {
         0 => {
-            actuator1down.set_value(1);
-            actuator2down.set_value(1);
-        }
-        _ => {
             actuator1up.set_value(1);
             actuator2up.set_value(1);
+        }
+        _ => {
+            actuator1down.set_value(1);
+            actuator2down.set_value(1);
         }
     }
 

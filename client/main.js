@@ -3,11 +3,13 @@
 const process = require('process');
 const http = require('http');
 const fs = require('fs');
+const path = require('path');
 
+const installPath = path.join(__filename, '..');
 
-var helpMessage =
+const helpMessage =
   `
-fig-table Node.js CLI
+🍐 fig-table Node.js CLI
 
 Usage:
     fig-table <number>            Move table up by x centemeters
@@ -18,11 +20,17 @@ Options:
     -v, --version                 Print version info and exit
     -c, --config <ip-address>     Configure the app with a unique ip.`;
 
+/*
+type CommandMap = {
+  [index: string]: (args?: string[]) => void
+};
+*/
+
 // Map of regex key to command function.
-const commandMap = {
+const commandMap /*: CommandMap*/ = {
 
   '--help': () => {
-    console.log(helpMessage)
+    console.log(helpMessage);
   },
 
   '-h': () => commandMap['--help'](),
@@ -34,25 +42,36 @@ const commandMap = {
   '-v': () => commandMap['--version'](),
 
   '--config': (args) => {
-    if (args.length > 0 && args[1].match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/))
+    if (!(args.length > 0 && args[1] && args[1].match(/(((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))/)))
       return console.error('Error: Please enter a valid IPv4 address.');
+    
+    fs.writeFileSync(installPath + '/config.json', JSON.stringify({
+      ip: args[1]
+    }), {
+      encoding: 'utf8'
+    });
 
-    fs.writeFileSync('./config.json', JSON.stringify({ ip: args[0] }), { encoding: 'utf8' });
-
+    console.log('✅ Configuration stored @ ' + installPath)
   },
 
-  '-c': () => commandMap['--config'](),
+  '-c': (args) => commandMap['--config'](args),
 
-  '(?:\d*\.)?\d+': (args) => {
+  '[-.0-9]+': (args) => {
 
-    if (!fs.existsSync('./config.json'))
+    if (!fs.existsSync(installPath + '/config.json'))
       return console.error('Error: Please configure application first (e.g. fig-table -c 255.255.255.255)');
 
-    var {ip} = JSON.parse(fs.readFileSync('./config.json'));
+    var {
+      ip
+    } = JSON.parse(fs.readFileSync(installPath + '/config.json'));
+
+    let cmPerSecond = 0.5;
+    let direction = args[0] > 0 ? .9 : -.9;
+    let time = Math.abs(args[0]) * cmPerSecond * 1000;
 
     var postData = JSON.stringify({
-      'vector': args[0],
-      'time': 100
+      direction,
+      time
     });
 
     var options = {
@@ -82,26 +101,14 @@ const commandMap = {
     // write data to request body
     req.write(postData);
     req.end();
+    console.log('↕️️ Moving table %s %s cm.', direction > 0 ? 'up' : 'down', Math.abs(args[0]));
   }
-
 }
-
 
 // Start Processing Command Line Arguments
+if (process.argv.length < 3)
+      commandMap['-h']();
 
-for (var i = 0; i < process.argv.length; i++) {
-
-  // Check if there's a key in the Command Map 
-  // that matches the command line argument
-  var match = Object.keys(commandMap).reduce(
-    (prev, cur) => prev | RegExp(cur).exec(process.argv[i]),
-    null);
-
-  if (match) {
-    match([...process.argv].splice(0, i-1));
-    break;
-  }
-  else if (i === process.argv.length - 1) {
-    commandMap['-h']();
-  }
-}
+for (let command in commandMap)
+  if (RegExp(command).test(process.argv[2])) 
+    return commandMap[command]([...process.argv].splice(2, process.argv.length));

@@ -10,7 +10,7 @@ fn main() {
 
     println!("
 🍐 Fig Standing Desk Server
-Version 1.3.0 (Feburary 18, 2017)
+Version 1.4.0 (Feburary 20, 2017)
 ================================");
 
     let server = http::create_server();

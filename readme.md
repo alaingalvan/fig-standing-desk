@@ -16,11 +16,11 @@ A repository with everything involved in the design and engineering of the Fig T
 | Relay Board | [Amazon](https://www.amazon.com/JBtek-Channel-Module-Arduino-Raspberry/dp/B00KTEN3TM/ref=sr_1_3?ie=UTF8&qid=1487462388&sr=8-3&keywords=relay+raspberry+pi) | $7.59 |
 | Female to Female GPIO Cables (40) | [Amazon](https://www.amazon.com/gp/product/B00KOL5BCC/ref=oh_aui_detailpage_o09_s00?ie=UTF8&psc=1) | $4.99 |
 | DC Power Pigtails (10) | [Amazon](https://www.amazon.com/gp/product/B00CUKHN0S/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) | $5.28 |
-| 12V 10A Power Supply | [Amazon](https://www.amazon.com/gp/product/B00Z9X4GLW/ref=oh_aui_detailpage_o00_s01?ie=UTF8&psc=1) | $21.99 |
+| 12V 10A Power Supply | [Amazon](https://www.amazon.com/gp/product/B00Z9X4GLW/ref=oh_aui_detailpage_o00_s01?ie=UTF8&psc=1) | $15.47 |
 | 2x Linear Actuators | [Ebay](http://www.ebay.com/itm/122042491329?_trksid=p2060353.m2749.l2649&ssPageName=STRK%3AMEBIDX%3AIT) | $94.27 |
 | Galvanized Steel Pipes | -- | -- |
 | Wooden Top | -- | -- |
-| Total | w/o tax | **$191.70** | 
+| Total | w/o tax | **$185.18** | 
 
 ## Server
 
@@ -30,8 +30,8 @@ The application that runs on the Raspberry Pi 3 B+, creates an HTTP server at po
 
 ```ts
 type APIRequest = {
-  // float that describes direction and speed of table.
-  vector: number
+  // float that describes direction of the table.
+  direction: number
   // milliseconds to perform action
   time: number
 }
@@ -99,7 +99,7 @@ npm i client -g
 ```
 
 ```bash
-fig-table Node.js CLI
+🍐 fig-table Node.js CLI
 
 Usage:
     fig-table <number>
@@ -108,7 +108,7 @@ Usage:
 Options:
     -h, --help          Display this message
     -V, --version       Print version info and exit
-    -v, --verbose ...   Use verbose output
+    -v, --verbose       Use verbose output
     -q, --quiet         No output printed to stdout
     -c <ip-address>     Configure the app with a unique ip.
 ```
