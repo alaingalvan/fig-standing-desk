@@ -91,6 +91,8 @@ sudo service table-server start
 
 ## Client
 
+![CLI Animation](docs/client-cli.gif)
+
 A CLI application that's meant to be installed as a global module on node. 
 
 ```bash
