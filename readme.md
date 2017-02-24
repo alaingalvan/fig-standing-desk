@@ -44,7 +44,7 @@ Instructions come from [this guide](https://github.com/japaric/rust-cross).
 ```bash
 # Step 1: Install the C cross toolchain
 sudo apt-get install -qq gcc-arm-linux-gnueabihf
-ls
+
 # Step 2: Install the cross compiled standard crates
 rustup target add armv7-unknown-linux-gnueabihf
 
