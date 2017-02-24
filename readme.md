@@ -7,7 +7,7 @@ A repository with everything involved in the design and engineering of the Fig T
 
 - **Server** - A Rust HTTP server 
 - **Client** - A Node.js CLI tool that you can easily send requests to the table from.
-- **CAD** - 3D model scematics for the outer table design.
+- **CAD** - 3D model schematics for the outer table design.
 
 | Product | Store | Cost |
 |---------|-------|------|
@@ -100,19 +100,17 @@ git clone git@github.com:alaingalvan/fig-standing-desk.git
 npm i client -g
 ```
 
-```bash
+```
 🍐 fig-table Node.js CLI
 
 Usage:
-    fig-table <number>
+    fig-table <number>            Move table up by x centimeters
     fig-table [options]
 
 Options:
-    -h, --help          Display this message
-    -V, --version       Print version info and exit
-    -v, --verbose       Use verbose output
-    -q, --quiet         No output printed to stdout
-    -c <ip-address>     Configure the app with a unique ip.
+    -h, --help                    Display this message
+    -v, --version                 Print version info and exit
+    -c, --config <ip-address>     Configure the app with a unique ip.
 ```
 
 ## CAD

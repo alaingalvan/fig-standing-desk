@@ -12,7 +12,7 @@ const helpMessage =
 🍐 fig-table Node.js CLI
 
 Usage:
-    fig-table <number>            Move table up by x centemeters
+    fig-table <number>            Move table up by x centimeters
     fig-table [options]
 
 Options:
@@ -20,14 +20,8 @@ Options:
     -v, --version                 Print version info and exit
     -c, --config <ip-address>     Configure the app with a unique ip.`;
 
-/*
-type CommandMap = {
-  [index: string]: (args?: string[]) => void
-};
-*/
-
 // Map of regex key to command function.
-const commandMap /*: CommandMap*/ = {
+const commandMap = {
 
   '--help': () => {
     console.log(helpMessage);

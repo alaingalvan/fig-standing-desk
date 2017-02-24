@@ -1,6 +1,6 @@
 {
   "name": "fig-table-client",
-  "version": "1.0.0",
+  "version": "1.4.0",
   "description": "Node.js CLI for Fig Table",
   "main": "src/main.js",
   "bin": {
