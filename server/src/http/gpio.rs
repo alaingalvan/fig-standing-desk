@@ -12,6 +12,7 @@ pub fn send(direction: f32, time: u32) {
     let dir = if direction > 0.0 { 1 } else { 0 };
     let length = direction.abs() % 1.001;
 
+    // To protect mechanical relays, avoid bursts that are too short.
     if length < 0.1 || time < 10 {
         return;
     };
