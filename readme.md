@@ -1,3 +1,5 @@
+![Cover Image](cad/concept.png)
+
 # Fig Table
 
 [![License][license-img]][license-url]
