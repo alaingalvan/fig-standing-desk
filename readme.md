@@ -14,15 +14,29 @@ A repository with everything involved in the design and engineering of the Fig T
 | Product | Store | Cost |
 |---------|-------|------|
 | Raspberry Pi 3 B+ w/ PSU | [Amazon](https://www.amazon.com/gp/product/B01C6FFNY4/ref=oh_aui_search_detailpage?ie=UTF8&psc=1) | $46.99 |
-| 32 GB SD Card | [Amazon](https://www.amazon.com/gp/product/B010Q57T02/ref=od_aui_detailpages00?ie=UTF8&psc=1) | $10.59 |
+| 32 GB Micro SD Card | [Amazon](https://www.amazon.com/gp/product/B010Q57T02/ref=od_aui_detailpages00?ie=UTF8&psc=1) | $10.59 |
 | Relay Board | [Amazon](https://www.amazon.com/JBtek-Channel-Module-Arduino-Raspberry/dp/B00KTEN3TM/ref=sr_1_3?ie=UTF8&qid=1487462388&sr=8-3&keywords=relay+raspberry+pi) | $7.59 |
 | Female to Female GPIO Cables (40) | [Amazon](https://www.amazon.com/gp/product/B00KOL5BCC/ref=oh_aui_detailpage_o09_s00?ie=UTF8&psc=1) | $4.99 |
 | DC Power Pigtails (10) | [Amazon](https://www.amazon.com/gp/product/B00CUKHN0S/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) | $5.28 |
 | 12V 10A Power Supply | [Amazon](https://www.amazon.com/gp/product/B00Z9X4GLW/ref=oh_aui_detailpage_o00_s01?ie=UTF8&psc=1) | $15.47 |
 | 2x Linear Actuators | [Ebay](http://www.ebay.com/itm/122042491329?_trksid=p2060353.m2749.l2649&ssPageName=STRK%3AMEBIDX%3AIT) | $94.27 |
-| Galvanized Steel Pipes | -- | -- |
-| Wooden Top | -- | -- |
+| Aluminum 6061 Square Tube 4" X 4" X .25"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | -- |
+| Aluminum 6061 Square Tube 6" X 6" X .25"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | -- |
+| 8' x 12" x 1" Spruce Top (2) | [Florida Lumber](https://www.floridalumber.com/spruce.html) | -- |
+| Wood Glue | [Home Depot](https://www.homedepot.com/p/Gorilla-8-fl-oz-Wood-Glue-62000/100672167) | $4.47 |
+| Gray Stain | [Home Depot](https://www.homedepot.com/p/Varathane-1-qt-3X-Weathered-Gray-Premium-Wood-Stain-Case-of-2-267124/203377037) | -- |
+| Wood Satin Lacquer | [Home Depot](https://www.homedepot.com/p/Watco-1-gal-Clear-Satin-Lacquer-Wood-Finish-Case-of-2-63231/204803660) | -- |
 | Total | w/o tax | **$185.18** | 
+
+## Security
+
+For security reasons your Pi should be set up with a firewall to only allow for requests from web ports:
+
+```bash
+sudo apt-get install ufw
+ufw allow 80
+ufw enable
+```
 
 ## Server
 
