@@ -24,10 +24,11 @@ A repository with everything involved in the design and engineering of the Fig T
 | Wood Glue | [Home Depot](https://www.homedepot.com/p/Gorilla-8-fl-oz-Wood-Glue-62000/100672167) | $4.47 |
 | Gray Stain | [Home Depot](https://www.homedepot.com/p/Varathane-1-qt-3X-Weathered-Gray-Premium-Wood-Stain-Case-of-2-267124/203377037) | $15.54 |
 | Wood Satin Lacquer | [Home Depot](https://www.homedepot.com/p/Minwax-1-qt-Clear-Satin-Fast-Drying-Polyurethane-Interior-Wood-Protective-Finish-63010/100201939) | $10.77 |
-| Aluminum 6063 Square Tube 4" X 2" X .125"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | -- |
-| Aluminum 6063 Square Tube 4" X 4" X .125"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | -- |
-| Aluminum 6063 Square Tube 6" X 6" X .125"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | -- |
-| Total | w/o tax | **$252.94** | 
+| Aluminum 6063 Square Tube 4' x 6" X 6" X .125"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | $60.00 |
+| Aluminum 6063 Square Tube 6' x 6" X 3" X .125"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | $45.00 |
+| Aluminum 6063 Square Tube 4' x 4" X 4" X .125"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | $26.66 |
+
+| Total | w/o tax | **383.94** | 
 
 ## Security
 
@@ -134,7 +135,7 @@ Options:
 
 Blender files used to design and CNC the table.
 
-[license-img]: http://img.shields.io/:license-mit-blue.svg?style=flat-square
-[license-url]: https://opensource.org/licenses/MIT
+[license-img]: http://img.shields.io/:license-lgpl3-blue.svg?style=flat-square
+[license-url]: https://opensource.org/licenses/lgpl-3.0.html
 [donate-img]: https://img.shields.io/badge/$-support-green.svg?style=flat-square
 [donate-url]: https://www.paypal.me/alaingalvan/3
