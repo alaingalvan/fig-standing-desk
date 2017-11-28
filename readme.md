@@ -27,7 +27,6 @@ A repository with everything involved in the design and engineering of the Fig T
 | Aluminum 6063 Square Tube 4' x 6" X 6" X .125"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | $60.00 |
 | Aluminum 6063 Square Tube 6' x 6" X 3" X .125"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | $45.00 |
 | Aluminum 6063 Square Tube 4' x 4" X 4" X .125"  | [Metal Supermarkets](https://www.metalsupermarkets.com/metals/aluminum/aluminum-6061-square-tube/) | $26.66 |
-
 | Total | w/o tax | **383.94** | 
 
 ## Security
