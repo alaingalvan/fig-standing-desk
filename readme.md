@@ -20,7 +20,7 @@ A repository with everything involved in the design and engineering of the Fig T
 | DC Power Pigtails (10) | [Amazon](https://www.amazon.com/gp/product/B00CUKHN0S/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) | $5.28 |
 | 12V 10A Power Supply | [Amazon](https://www.amazon.com/gp/product/B00Z9X4GLW/ref=oh_aui_detailpage_o00_s01?ie=UTF8&psc=1) | $15.47 |
 | 2x Linear Actuators | [Ebay](http://www.ebay.com/itm/122042491329?_trksid=p2060353.m2749.l2649&ssPageName=STRK%3AMEBIDX%3AIT) | $94.27 |
-| 8' x 12" x 1" Plywood | [Lowes]https://www.lowes.com/pd/Top-Choice-Blondewood-1-2-in-Whitewood-Plywood-Application-as-4-x-8/50121137) | $36.98 |
+| 8' x 12" x 1" Plywood | [Lowes](https://www.lowes.com/pd/Top-Choice-Blondewood-1-2-in-Whitewood-Plywood-Application-as-4-x-8/50121137) | $36.98 |
 | Wood Glue | [Home Depot](https://www.homedepot.com/p/Gorilla-8-fl-oz-Wood-Glue-62000/100672167) | $4.47 |
 | Gray Stain | [Home Depot](https://www.homedepot.com/p/Varathane-1-qt-3X-Weathered-Gray-Premium-Wood-Stain-Case-of-2-267124/203377037) | $15.54 |
 | Wood Satin Lacquer | [Home Depot](https://www.homedepot.com/p/Minwax-1-qt-Clear-Satin-Fast-Drying-Polyurethane-Interior-Wood-Protective-Finish-63010/100201939) | $10.77 |
